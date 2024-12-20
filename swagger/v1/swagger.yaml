@@ -1,0 +1,280 @@
+openapi: 3.0.1
+info:
+  title: Beer API
+  description: API para gerenciar informações sobre cervejas, acompanhamentos e pubs.
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:3000/api/v1'
+    description: API Local
+
+paths:
+  /food_pairings:
+    get:
+      summary: "Lista todos os acompanhamentos de comida"
+      tags:
+        - FoodPairings
+      responses:
+        '200':
+          description: "Lista de acompanhamentos encontrados"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FoodPairing'
+    post:
+      summary: "Cria um novo acompanhamento de comida"
+      tags:
+        - FoodPairings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodPairing'
+      responses:
+        '201':
+          description: "Acompanhamento criado com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodPairing'
+        '422':
+          description: "Dados inválidos"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+
+  /food_pairings/{id}:
+    get:
+      summary: "Detalha um acompanhamento de comida"
+      tags:
+        - FoodPairings
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "ID do acompanhamento"
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Acompanhamento encontrado"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodPairing'
+        '404':
+          description: "Acompanhamento não encontrado"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+    put:
+      summary: "Atualiza um acompanhamento de comida"
+      tags:
+        - FoodPairings
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "ID do acompanhamento"
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FoodPairing'
+      responses:
+        '200':
+          description: "Acompanhamento atualizado com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FoodPairing'
+        '422':
+          description: "Dados inválidos"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+
+    delete:
+      summary: "Exclui um acompanhamento de comida"
+      tags:
+        - FoodPairings
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "ID do acompanhamento"
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Acompanhamento excluído com sucesso"
+        '404':
+          description: "Acompanhamento não encontrado"
+
+  /pubs:
+    get:
+      summary: "Lista todos os pubs"
+      tags:
+        - Pubs
+      responses:
+        '200':
+          description: "Lista de pubs encontrados"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pub'
+    post:
+      summary: "Cria um novo pub"
+      tags:
+        - Pubs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pub'
+      responses:
+        '201':
+          description: "Pub criado com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pub'
+        '422':
+          description: "Dados inválidos"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+
+  /pubs/{id}:
+    get:
+      summary: "Detalha um pub"
+      tags:
+        - Pubs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "ID do pub"
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: "Pub encontrado"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pub'
+        '404':
+          description: "Pub não encontrado"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+    put:
+      summary: "Atualiza um pub"
+      tags:
+        - Pubs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "ID do pub"
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pub'
+      responses:
+        '200':
+          description: "Pub atualizado com sucesso"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pub'
+        '422':
+          description: "Dados inválidos"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+
+    delete:
+      summary: "Exclui um pub"
+      tags:
+        - Pubs
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "ID do pub"
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: "Pub excluído com sucesso"
+        '404':
+          description: "Pub não encontrado"
+
+components:
+  schemas:
+    FoodPairing:
+      type: object
+      properties:
+        id:
+          type: integer
+        food_name:
+          type: string
+        beer_id:
+          type: integer
+    Pub:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        location:
+          type: string

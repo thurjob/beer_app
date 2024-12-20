@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: beer_app_development
+  username: postgres
+  password: 'nova_senha'
+  host: localhost
+
+
+test:
+  <<: *default
+  database: beer_app_test
+  username: postgres
+  password: 'nova_senha'
+  host: localhost
+
+production:
+  <<: *default
+  database: beer_app_production
+  username: postgres
+  password: 'nova_senha'
+  host: localhost
