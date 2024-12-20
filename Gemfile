@@ -37,7 +37,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem 'rswag-api', '~> 2.0'
   gem 'rswag-ui', '~> 2.0'
-  gem 'rspec-rails', '~> 5.0'
+  gem 'rspec-rails', '~> 7.1'
   gem 'simplecov', require: false, group: :test
   gem 'pg', '>= 0.18', '< 2.0'
   gem 'faker', '~> 2.0'
